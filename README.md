@@ -1,4 +1,4 @@
-CrawlEM
+CrawlEm
 ======
 
 Making a web crawler in Ruby. 
