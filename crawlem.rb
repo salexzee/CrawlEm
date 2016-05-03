@@ -67,13 +67,13 @@ class WebCrawler
           case scraped_url[0..4]
           when "https" then
             save_site_crawl(scraped_url)
-            puts "Checked: #{scraped_url}\n.....................\n"
+            puts "Checked: #{scraped_url}\n---------------------\n"
           when "http:" then
             save_site_crawl(scraped_url)
-            puts "Checked: #{scraped_url}\n.....................\n"
+            puts "Checked: #{scraped_url}\n---------------------\n"
           when "ftp:" then
             save_site_crawl(scraped_url)
-            puts "Checked: #{scraped_url}\n.....................\n"
+            puts "Checked: #{scraped_url}\n---------------------\n"
           else
             url_split = url_to_crawl.split("/")
 
