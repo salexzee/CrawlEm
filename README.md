@@ -62,4 +62,7 @@ Checked: http://samwebb.me/articles?tag=python
 Status Update: 23 links found.
 ```
 
+Credit
+---------
 
+I would like to give credit to the [rubyacademy](https://www.youtube.com/channel/UCWcM9Y34UY-WD_7TkSpivIw) YouTube page for getting me started with this. Check out the [First Video](https://www.youtube.com/watch?v=mMHflTR-MuY) in a 3 part video series that shows how to make a basic web crawler in Ruby.
