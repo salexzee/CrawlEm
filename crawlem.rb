@@ -62,6 +62,8 @@ class WebCrawler
           next if scraped_url == "#"
           # Skips if url is a mailto
           next if scraped_url.include? 'mailto:'
+          # Skips if url is a shortened Twitter link
+          next if scraped_url.include? '//t.co/'
 
           # Checks first 5 characters of scraped_url
           case scraped_url[0..4]
