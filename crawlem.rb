@@ -19,10 +19,20 @@ class WebCrawler
     end
   end
 
-  def check
+  def check(url)
+    data = File.read(@file)
+    urls = data.split
+    if urls.include? url
+      return false
+    else
+      return true
+    end
   end
 
   def fetch_database_urls
+    active_urls = File.read(@file)
+    urls = active_urls.split
+    return urls
   end
 
   public
