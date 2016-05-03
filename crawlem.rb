@@ -44,27 +44,55 @@ class WebCrawler
     links_found = 0
     agent = Mechanize.new
 
-    agent.agent.http.varify_mode = OpenSSL::SSL::VERIFY_NONE
+    agent.agent.http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
     fetched_urls = fetch_database_urls
 
     fetched_urls.each do |url_to_crawl|
 
-      page = agent.get(url_to_crawl)
+      begin
 
-      links = page.links
+        page = agent.get(url_to_crawl)
 
-      links.each do |link|
-        scraped_url = link.attributes['href']
-        next if scraped_url == "#"
+        links = page.links
 
-        case scraped_url[0..4]
-        when "https" then
-        when "http:" then
-        when "ftp:" then
-        else
+        links.each do |link|
+          scraped_url = link.attributes['href']
+          next if scraped_url == "#"
+
+          case scraped_url[0..4]
+          when "https" then
+            save_site_crawl(scraped_url)
+            puts "Checked: #{scraped_url}\n.....................\n"
+          when "http:" then
+            save_site_crawl(scraped_url)
+            puts "Checked: #{scraped_url}\n.....................\n"
+          when "ftp:" then
+            save_site_crawl(scraped_url)
+            puts "Checked: #{scraped_url}\n.....................\n"
+          else
+            url_split = url_to_crawl.split("/")
+
+            if scraped_url[0] == "/"
+              final_url = url_split[0] + "//" + url_split[2] + scraped_url
+            else
+              final_url = url_split[0] + "//" + url_split[2] + "/" + scraped_url
+            end
+            save_site_crawl(final_url)
+            puts "Checked: #{final_url}\n---------------------\n"
+          end
+
+          links_found += 1
+
         end
+
+      rescue StandardError => error_message
+
+        puts "Request Level Error: #{error_message}"
+
       end
+
+      puts "Status Update: #{links_found} links found."
 
     end
   end
