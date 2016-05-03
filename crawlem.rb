@@ -58,8 +58,12 @@ class WebCrawler
 
         links.each do |link|
           scraped_url = link.attributes['href']
+          # Skips if scraped_url is a hash, meaning same page
           next if scraped_url == "#"
+          # Skips if url is a mailto
+          next if scraped_url.include? 'mailto:'
 
+          # Checks first 5 characters of scraped_url
           case scraped_url[0..4]
           when "https" then
             save_site_crawl(scraped_url)
